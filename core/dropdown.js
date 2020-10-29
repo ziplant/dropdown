@@ -86,7 +86,7 @@ export class Dropdown {
 
     this.list.onmousedown = (e) => {
       if (e.target.dataset.type == "item") {
-        this.dropdown(e.target.dataset.id);
+        this.select(e.target.dataset.id);
       }
     };
   }
