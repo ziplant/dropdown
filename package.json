@@ -1,0 +1,14 @@
+{
+  "name": "simple-dropdown",
+  "version": "0.1.0",
+  "keywords": [
+    "select",
+    "dropdown",
+    "virtual"
+  ],
+  "description": "Simple dropdown virtual select with collapsed styles ans programmatically control",
+  "main": "core/dropdown.js",
+  "author": "ZipLant",
+  "repository": "https://github.com/ziplant/dropdown.git",
+  "license": "MIT"
+}

@@ -1,0 +1,28 @@
+.dropdown {
+  position: relative;
+}
+
+.dropdown_toggle {
+  width: 100%;
+  border: 0;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdown_list {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  overflow-y: auto;
+  user-select: none;
+}
+
+.dropdown_list--open {
+  display: block;
+}
