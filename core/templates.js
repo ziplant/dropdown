@@ -1,5 +1,5 @@
 export const templates = {
-  dropdown: {
+  list: {
     elem: "div",
     attributes: {
       class: "dropdown",

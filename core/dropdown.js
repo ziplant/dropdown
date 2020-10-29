@@ -1,5 +1,4 @@
 import { templates } from "./templates";
-import "./dropdown.css";
 
 export class Dropdown {
   constructor(selector, options) {
@@ -53,7 +52,7 @@ export class Dropdown {
 
   create() {
     this.$root.innerHTML = "";
-    this.$el = this.render(this.options.templates.dropdown);
+    this.$el = this.render(this.options.templates.list);
 
     this.toggle = this.$el.querySelector("[data-type='toggle']");
     this.list = this.$el.querySelector("[data-type='list']");
@@ -129,7 +128,7 @@ export class Dropdown {
     }
   }
 
-  dropdown(id) {
+  select(id) {
     let elem = this.options.data.find((el) => el.id == id);
 
     if (elem) {
