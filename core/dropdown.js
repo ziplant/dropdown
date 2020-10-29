@@ -2,24 +2,26 @@ import { templates } from "./templates";
 import "./dropdown.css";
 
 export class Dropdown {
-  #toggle;
-  #list;
-  #input;
-  options = {
-    templates: templates,
-    placeholder: "dropdown",
-    inputName: "dropdown",
-    openClass: "dropdown_list--open",
-    data: [],
-  };
+  constructor(selector, options) {
+    this.toggle;
+    this.list;
+    this.input;
+    this.options = {
+      templates: templates,
+      placeholder: "dropdown",
+      inputName: "dropdown",
+      openClass: "dropdown_list--open",
+      data: [],
+    };
 
-  constructor(dropdownor, options) {
-    this.$root = document.querySelector(dropdownor);
-    options ? this.#setOptions(options) : null;
+    this.$root = document.querySelector(selector);
+
+    options ? this.setOptions(options) : null;
+
     this.create();
   }
 
-  #setOptions(options) {
+  setOptions(options) {
     Object.keys(options).forEach((key) => {
       if (key == "templates") {
         Object.keys(options[key]).forEach((template) => {
@@ -31,7 +33,7 @@ export class Dropdown {
     });
   }
 
-  #render(template) {
+  render(template) {
     let element = document.createElement(template.elem);
 
     for (let key in template.attributes) {
@@ -42,7 +44,7 @@ export class Dropdown {
 
     if (template.children) {
       template.children.forEach((children) => {
-        element.appendChild(this.#render(children));
+        element.appendChild(this.render(children));
       });
     }
 
@@ -51,14 +53,14 @@ export class Dropdown {
 
   create() {
     this.$root.innerHTML = "";
-    this.$el = this.#render(this.options.templates.dropdown);
+    this.$el = this.render(this.options.templates.dropdown);
 
-    this.#toggle = this.$el.querySelector("[data-type='toggle']");
-    this.#list = this.$el.querySelector("[data-type='list']");
-    this.#input = this.$el.querySelector("[data-type='input']");
+    this.toggle = this.$el.querySelector("[data-type='toggle']");
+    this.list = this.$el.querySelector("[data-type='list']");
+    this.input = this.$el.querySelector("[data-type='input']");
 
-    this.#toggle.textContent = this.options.placeholder;
-    this.#input.setAttribute("name", this.options.inputName);
+    this.toggle.textContent = this.options.placeholder;
+    this.input.setAttribute("name", this.options.inputName);
 
     this.options.data.forEach((item) => {
       let template = this.options.templates.item;
@@ -66,24 +68,24 @@ export class Dropdown {
       template.attributes = template.attributes || {};
       template.attributes["data-id"] = item.id;
 
-      this.#list.appendChild(this.#render(template));
+      this.list.appendChild(this.render(template));
     });
 
     this.$root.appendChild(this.$el);
 
-    this.#setup();
+    this.setup();
   }
 
-  #setup() {
-    this.#toggle.onfocus = () => {
-      this.#list.classList.add(this.options.openClass);
+  setup() {
+    this.toggle.onfocus = () => {
+      this.list.classList.add(this.options.openClass);
     };
 
-    this.#toggle.onblur = () => {
-      this.#list.classList.remove(this.options.openClass);
+    this.toggle.onblur = () => {
+      this.list.classList.remove(this.options.openClass);
     };
 
-    this.#list.onmousedown = (e) => {
+    this.list.onmousedown = (e) => {
       if (e.target.dataset.type == "item") {
         this.dropdown(e.target.dataset.id);
       }
@@ -112,15 +114,15 @@ export class Dropdown {
   }
 
   open() {
-    this.#toggle.focus();
+    this.toggle.focus();
   }
 
   close() {
-    this.#toggle.blur();
+    this.toggle.blur();
   }
 
   isOpen() {
-    if (this.#list.classList.contains(this.options.openClass)) {
+    if (this.list.classList.contains(this.options.openClass)) {
       return true;
     } else {
       return false;
@@ -131,8 +133,8 @@ export class Dropdown {
     let elem = this.options.data.find((el) => el.id == id);
 
     if (elem) {
-      this.#input.value = elem.id;
-      this.#toggle.textContent = elem.value;
+      this.input.value = elem.id;
+      this.toggle.textContent = elem.value;
       return true;
     }
     return false;
