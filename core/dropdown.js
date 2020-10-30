@@ -76,6 +76,10 @@ export class Dropdown {
   }
 
   setup() {
+    this.toggle.onclick = (e) => {
+      e.preventDefault();
+    };
+
     this.toggle.onfocus = () => {
       this.list.classList.add(this.options.openClass);
     };
